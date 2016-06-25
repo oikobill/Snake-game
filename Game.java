@@ -80,8 +80,15 @@ public class Game {
         this.initializeSnake(2);
         while (true) {
         	this.render();
-        	StdDraw.show(1000);
-        	updateBoard();
+        	StdDraw.show(100);
+        	try {
+        		updateBoard();
+        	} catch(ArrayIndexOutOfBoundsException e) {
+        		// Game Over Menu goes here!
+        		System.out.println("Exception"+ e+" caught!");
+        		System.exit(0);
+        	}
+        	
         }
     }
     
