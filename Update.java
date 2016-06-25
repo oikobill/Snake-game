@@ -1,5 +1,3 @@
-import java.util.TimerTask;
-
 public class Update {
 	/* direction in which the snake is heading: 
 	'u' -> up
@@ -7,18 +5,24 @@ public class Update {
 	'l' -> left
 	'r' -> right
 	*/ 
-	char direction;
+	// char direction;
 	int[][] board;
+	int[] head;
+	int[] butt;
 
-	public Update(int[][] board, char direction) {
-		this.direction = direction;
+	public Update(int[][] board) {
+		// this.direction = direction;
 		this.board = board;
 	}
 
-	public void update_position() {
-		
-	}
-
-	public static void main(String[] args) {
+	public int[][] updateBoard() {
+		int[][] tmp = new int[2][];
+		this.head[0] = head[0]+1;
+		this.head[1] = head[1];
+		this.butt[0] = butt[0]+1;
+		this.butt[1] = butt[1];
+		tmp[0] = head;
+		tmp[1] = butt;
+		return tmp;
 	}
 }
