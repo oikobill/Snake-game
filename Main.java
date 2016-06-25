@@ -1,12 +1,12 @@
 public class Main {
     public static void gameOver() 
-    {        
+    {   StdDraw.clear();    
         // Game Over screen dimensions
         StdDraw.setXscale(0.0, 16.0);
         StdDraw.setYscale(0.0, 16.0);
         
         // Game Over Background        
-        StdDraw.picture(8.0, 8.0, "gameover.png");
+        // StdDraw.picture(8.0, 8.0, "gameover.png");
         
         // Main Menu High Scores
         StdDraw.picture(8.0, 8.0, "blanksquare.png");
@@ -17,26 +17,28 @@ public class Main {
         
         // Main Menu Retry
         StdDraw.picture(8.0, 1.0, "menu.png");        
+        StdDraw.show();
         
-        // Button Interactions
-        
-        if (StdDraw.mousePressed()) 
-        {       
-            // if Retry clicked, initiate new Game
-            if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 && 
-                StdDraw.mouseY() >= 4.0 && StdDraw.mouseY() <= 7.0) 
-            {
-                Game game = new Game();
-                game.startGame();               
+        while(true){
+            // Button Interactions
+            if (StdDraw.mousePressed()) 
+            {       
+                // if Retry clicked, initiate new Game
+                if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 && 
+                    StdDraw.mouseY() >= 4.0 && StdDraw.mouseY() <= 7.0) 
+                {
+                    Game game = new Game();
+                    game.startGame();               
+                }
+                // if Main Menu button clicked, return to Main Menu
+                else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 
+                             && StdDraw.mouseY() >= 0.0 && StdDraw.mouseY() <=  3.0) 
+                { 
+                    StdDraw.clear();
+                    MainMenu();    
+                }           
             }
-            // if Main Menu button clicked, return to Main Menu
-            else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 
-                         && StdDraw.mouseY() >= 0.0 && StdDraw.mouseY() <=  3.0) 
-            {
-                MainMenu();    
-            }           
         }
-        
     }
     
     public static void MainMenu(){
