@@ -26,6 +26,7 @@ public class Game {
 	}
 
 	public void drawWindow() {
+		StdDraw.clear();
         StdDraw.setXscale(0.0, windowWidth);
         StdDraw.setYscale(0.0, windowHeight);       
         StdDraw.show();
