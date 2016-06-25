@@ -3,7 +3,6 @@
 * 0 represents an empty tile 
 * 1 represents a tile occupied by the Snake's body
 * 2 represents the head of the Snake (represented with red in the app)
-* 3 Last tile of the Snake's body
 * 4 Food tile
 */
 
@@ -74,12 +73,10 @@ public class Game {
         /* Creates a snake in the middle of the window*/
         // set head
         board[head_coordinates[0]][head_coordinates[1]] = 2;
-        for (int i=1; i<=3; i++) {
+        for (int i=1; i<=4; i++) {
             board[windowWidth/2 - i][windowHeight/2] = 1;
         }
-        // set butt
-        board[butt_coordinates[0]][butt_coordinates[1]] =  3;
-        
+                
         // randomly generate food
         generate_food(num_foods);
     }
@@ -89,7 +86,7 @@ public class Game {
         StdDraw.clear();
         for(int i=0; i<this.windowWidth; i++) {
             for (int j=0; j<this.windowHeight;j++) {
-                if (this.board[i][j]==1 |this.board[i][j]==3) {
+                if (this.board[i][j]==1) {
                     StdDraw.setPenColor(StdDraw.BLACK);
                     StdDraw.filledSquare(i+0.5, j+0.5, 0.5);
                 } else if (this.board[i][j]==2) {
