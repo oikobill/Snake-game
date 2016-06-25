@@ -6,6 +6,7 @@ public class Game {
     int[] butt_coordinates;
     String current_direction;
     int[] scores;
+    int current_score=0;
     
     public Game(int[] scores) {
         this.windowWidth=60;
@@ -103,8 +104,7 @@ public class Game {
             StdDraw.show(100);
             try {
                 Update.updateBoard(this);
-                //System.out.println(current_direction);
-            } catch(ArrayIndexOutOfBoundsException e) {
+            } catch(Exception e) {
                 // Game Over Menu goes here!
                 Main.gameOver(this.scores);
             }
