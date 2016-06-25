@@ -78,7 +78,7 @@ public class Game {
 			}
 		}
 	}
-    public void startGame() {  
+    public void startGame() {
         this.drawWindow();
         this.initializeSnake(2);
         while (true) {
