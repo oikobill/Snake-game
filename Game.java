@@ -5,8 +5,9 @@ public class Game {
     int[] head_coordinates;
     int[] butt_coordinates;
     String current_direction;
+    int[] scores;
     
-    public Game() {
+    public Game(int[] scores) {
         this.windowWidth=60;
         this.windowHeight=60;
         this.board = new int[60][60];
@@ -17,9 +18,10 @@ public class Game {
         this.butt_coordinates[0] = windowWidth/2 - 4;
         this.butt_coordinates[1] = windowHeight/2;
         this.current_direction = "r";
+        this.scores = scores;
     }
     
-    public Game(int height, int width) {
+    public Game(int height, int width, int[] scores) {
         this.windowWidth=width;
         this.windowHeight=height;
         this.board = new int[width][height];
@@ -28,6 +30,7 @@ public class Game {
         this.butt_coordinates[0] = windowWidth/2 - 4;
         this.butt_coordinates[1] = windowHeight/2;
         this.current_direction = "r";
+        this.scores = scores;
     }
     
     public void drawWindow() {
@@ -83,19 +86,19 @@ public class Game {
         this.drawWindow();
         this.initializeSnake(2);
         while (true) {
-        	//If up arrows are pressed
-        	if (StdDraw.isKeyPressed(38) && !(this.current_direction.equals("d"))) {
-        			this.current_direction = "u";
-        		}
-        	else if (StdDraw.isKeyPressed(37) && !(this.current_direction.equals("r"))) {
-        			this.current_direction = "l";
-        		}
-        	else if (StdDraw.isKeyPressed(39) && !(this.current_direction.equals("l"))) {
-        			this.current_direction = "r";
-        		}
-        	else if (!(this.current_direction.equals("u")) && StdDraw.isKeyPressed(40)) {
-        			this.current_direction = "d";
-        		}
+            //If up arrows are pressed
+            if (StdDraw.isKeyPressed(38) && !(this.current_direction.equals("d"))) {
+                this.current_direction = "u";
+            }
+            else if (StdDraw.isKeyPressed(37) && !(this.current_direction.equals("r"))) {
+                this.current_direction = "l";
+            }
+            else if (StdDraw.isKeyPressed(39) && !(this.current_direction.equals("l"))) {
+                this.current_direction = "r";
+            }
+            else if (!(this.current_direction.equals("u")) && StdDraw.isKeyPressed(40)) {
+                this.current_direction = "d";
+            }
             this.render();
             StdDraw.show(100);
             try {
@@ -103,14 +106,9 @@ public class Game {
                 //System.out.println(current_direction);
             } catch(ArrayIndexOutOfBoundsException e) {
                 // Game Over Menu goes here!
-                Main.gameOver();
+                Main.gameOver(this.scores);
             }
             
         }
-    }
-
-    public static void main(String[] args) {
-        Game game = new Game();
-        game.startGame();
     }
 }

@@ -81,7 +81,7 @@ public class Main {
                 if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 && 
                     StdDraw.mouseY() >= 4.0 && StdDraw.mouseY() <= 7.0) 
                 {
-                    Game game = new Game();
+                    Game game = new Game(scores);
                     game.startGame();               
                 }
                 // if Main Menu button clicked, return to Main Menu
@@ -126,7 +126,7 @@ public class Main {
                 else if (StdDraw.mouseX() >= 4.0 && StdDraw.mouseX() <= 12.0 &&
                          StdDraw.mouseY() >= 9.0 && StdDraw.mouseY() <= 11.0) 
                 {  
-                    Game game = new Game();
+                    Game game = new Game(scores);
                     game.startGame();
                 }
                 // if High Scores clicked
