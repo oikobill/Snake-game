@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.PriorityQueue;
 
 public class Main {
     
@@ -52,7 +53,7 @@ public class Main {
          }        
     }
      
-    public static void gameOver(int[] scores) 
+    public static void gameOver(int[] scores, int current_score) 
     {   StdDraw.clear();    
         
         // Game Over screen dimensions
@@ -64,7 +65,7 @@ public class Main {
         
         // Main Menu High Scores
         StdDraw.picture(8.0, 8.0, "blanksquare.png");
-        StdDraw.text(8.0, 8.0, "Score: ");
+        StdDraw.text(8.0, 8.0, "Score: "+current_score);
         
         // Main Menu Retry
         StdDraw.picture(8.0, 4.0, "retry.png");
@@ -142,8 +143,7 @@ public class Main {
     }
     public static void main(String[] args) {
         
-        int[] scores = new int[10];
-        int lastScore = 0;
+        PriorityQueue<Integer> queue = new PriorityQueue<String>(10);
         
         // read high scores from txt file
         String fileName = "HighScores.txt";
@@ -156,10 +156,8 @@ public class Main {
             
             for (int i = 0; i < 10; i++)
             {
-                scores[i] = Integer.parseInt(bufferedReader.readLine());
+                queue.add(Integer.parseInt(bufferedReader.readLine()));
             }
-            
-            lastScore = Integer.parseInt(bufferedReader.readLine());
             
             bufferedReader.close();
         }

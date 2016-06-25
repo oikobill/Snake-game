@@ -106,7 +106,7 @@ public class Game {
                 Update.updateBoard(this);
             } catch(Exception e) {
                 // Game Over Menu goes here!
-                Main.gameOver(this.scores);
+                Main.gameOver(this.scores, this.current_score);
             }
             
         }
