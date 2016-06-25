@@ -1,6 +1,60 @@
+import java.io.*;
+
 public class Main {
-    public static void gameOver() 
+    
+     public static void highScores(int[] scores)
+    {
+        // High Score Dimensions
+        StdDraw.setXscale(0.0, 16.0);
+        StdDraw.setYscale(0.0, 16.0);
+        
+        // High Scores Background
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.filledSquare(8.0, 8.0, 8.0);
+        
+        // High Scores Title
+        StdDraw.setPenColor(StdDraw.MAGENTA);
+        StdDraw.filledRectangle(8.0, 13.0, 4.0, 1.0);
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.text(8.0, 13.0, "High Scores");
+        
+        StdDraw.setPenColor(StdDraw.GRAY);
+        StdDraw.filledRectangle(8.0, 6.0, 2.0, 5.5);
+        
+        // create list of high scores
+        StdDraw.setPenColor(StdDraw.BLACK);
+        for (int i = 1; i <= 10; i++) 
+        { 
+            StdDraw.text(7.0, 11.5 - i, i + ": ");
+        }
+        for (int i = 0; i < 10; i++) 
+        { 
+            StdDraw.text(8.0, 10.5 - i, scores[i] + "");
+       }
+                
+        // Return Button
+        StdDraw.setPenColor(StdDraw.GRAY);
+        StdDraw.filledRectangle(14.5, 0.5, 1.5, 0.5);
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.text(14.5, 0.5, "Back");
+        
+         while (true) 
+        {
+            if (StdDraw.mousePressed())
+            {
+                if (StdDraw.mouseX() >= 13.0 && StdDraw.mouseX() <= 16.0 &&
+                    StdDraw.mouseY() >= 0.0 && StdDraw.mouseY() <= 1.0)
+                {
+                    StdDraw.clear();
+                    MainMenu(scores);
+                }
+            }            
+         }        
+    }
+     
+    public static void gameOver(int[] scores) 
     {   StdDraw.clear();    
+        
         // Game Over screen dimensions
         StdDraw.setXscale(0.0, 16.0);
         StdDraw.setYscale(0.0, 16.0);
@@ -35,13 +89,13 @@ public class Main {
                              && StdDraw.mouseY() >= 0.0 && StdDraw.mouseY() <=  3.0) 
                 { 
                     StdDraw.clear();
-                    MainMenu();    
+                    MainMenu(scores);    
                 }           
             }
         }
     }
     
-    public static void MainMenu(){
+    public static void MainMenu(int [] scores){
         
         // Main Menu dimensions
         StdDraw.setXscale(0.0, 16.0);
@@ -79,13 +133,89 @@ public class Main {
                 else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 &&
                          StdDraw.mouseY() >= 5.0 && StdDraw.mouseY() <= 7.0) 
                 {
-                    // highScores(scores);
+                    StdDraw.clear();
+                    highScores(scores);
                     
                 }                
             }          
         }
     }
     public static void main(String[] args) {
-        MainMenu();
+        
+        int[] scores = new int[10];
+        int lastScore = 0;
+        
+        // read high scores from txt file
+        String fileName = "HighScores.txt";
+        
+        try
+        {
+            FileReader fileReader = new FileReader(fileName);
+            
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            
+            for (int i = 0; i < 10; i++)
+            {
+                scores[i] = Integer.parseInt(bufferedReader.readLine());
+            }
+            
+            lastScore = Integer.parseInt(bufferedReader.readLine());
+            
+            bufferedReader.close();
+        }
+        
+        catch (FileNotFoundException ex)
+        {
+            StdOut.println("Unable to open file '" + fileName + "'");
+        }
+        catch (IOException ex)
+        {
+            StdOut.println("Error reading file '" + fileName + "'");
+        }
+        
+        int temp1 = 0;
+        int temp2 = 0;
+        
+        // comparing last score (11th entry in file) to the 10 scores in array
+        for (int i = 0; i < 10; i++)
+        {
+            if (lastScore > scores[i])
+            {
+                temp1 = scores[i];
+                
+                for (int j = i; j < 9; j++)
+                {
+                    temp2 = scores[j + 1];
+                    scores[j + 1] = temp1;
+                    temp1 = temp2; 
+                }
+                
+                scores[i] = lastScore;
+                break;
+            }
+        }
+        
+        try
+        {
+            FileWriter fileWriter = new FileWriter(fileName);
+            
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            
+            for (int i = 0; i < 10; i++)
+            {
+                bufferedWriter.write("" + scores[i]);
+                bufferedWriter.newLine();
+            }
+            
+            bufferedWriter.write("" + lastScore);
+            
+            bufferedWriter.close();
+        }
+        
+        catch (IOException ex)
+        {
+            StdOut.println("Error writing file '" + fileName + "'");
+        }
+        MainMenu(scores);
     }
 }
