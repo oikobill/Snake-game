@@ -61,7 +61,50 @@ public class Main {
         StdDraw.setYscale(0.0, 16.0);
         
         // Game Over Background        
-        // StdDraw.picture(8.0, 8.0, "gameover.png");
+        //StdDraw.picture(8.0, 8.0, "gameover.png");
+        String fileName = "HighScores.txt";
+        int temp1 = 0;
+        int temp2 = 0;
+        
+        // comparing last score (11th entry in file) to the 10 scores in array
+        for (int i = 0; i < 10; i++)
+        {
+            if (current_score > scores[i])
+            {
+                temp1 = scores[i];
+                
+                for (int j = i; j < 9; j++)
+                {
+                    temp2 = scores[j + 1];
+                    scores[j + 1] = temp1;
+                    temp1 = temp2; 
+                }
+                
+                scores[i] = current_score;
+                break;
+            }
+        }
+        try
+        {
+            FileWriter fileWriter = new FileWriter(fileName);
+            
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            
+            for (int i = 0; i < 10; i++)
+            {
+                bufferedWriter.write("" + scores[i]);
+                bufferedWriter.newLine();
+            }
+            
+            //bufferedWriter.write("" + lastScore);
+            
+            bufferedWriter.close();
+        }
+        
+        catch (IOException ex)
+        {
+            StdOut.println("Error writing file '" + fileName + "'");
+        }
         
         // Main Menu High Scores
         StdDraw.picture(8.0, 8.0, "blanksquare.png");
@@ -143,7 +186,7 @@ public class Main {
     }
     public static void main(String[] args) {
         
-        PriorityQueue<Integer> queue = new PriorityQueue<String>(10);
+        PriorityQueue<Integer> queue = new PriorityQueue<Integer>(10);
         
         // read high scores from txt file
         String fileName = "HighScores.txt";
@@ -156,13 +199,10 @@ public class Main {
             
             for (int i = 0; i < 10; i++)
             {
-                queue.add(Integer.parseInt(bufferedReader.readLine()));
+                queue.add(-1*Integer.parseInt(bufferedReader.readLine()));
             }
-            
             bufferedReader.close();
-        }
-        
-        catch (FileNotFoundException ex)
+        }catch (FileNotFoundException ex)
         {
             StdOut.println("Unable to open file '" + fileName + "'");
         }
@@ -170,50 +210,13 @@ public class Main {
         {
             StdOut.println("Error reading file '" + fileName + "'");
         }
-        
-        int temp1 = 0;
-        int temp2 = 0;
-        
-        // comparing last score (11th entry in file) to the 10 scores in array
+
+        int[] scores = new int[10];
         for (int i = 0; i < 10; i++)
-        {
-            if (lastScore > scores[i])
             {
-                temp1 = scores[i];
-                
-                for (int j = i; j < 9; j++)
-                {
-                    temp2 = scores[j + 1];
-                    scores[j + 1] = temp1;
-                    temp1 = temp2; 
-                }
-                
-                scores[i] = lastScore;
-                break;
+                scores[i] = -1*queue.poll();
             }
-        }
         
-        try
-        {
-            FileWriter fileWriter = new FileWriter(fileName);
-            
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            
-            for (int i = 0; i < 10; i++)
-            {
-                bufferedWriter.write("" + scores[i]);
-                bufferedWriter.newLine();
-            }
-            
-            bufferedWriter.write("" + lastScore);
-            
-            bufferedWriter.close();
-        }
-        
-        catch (IOException ex)
-        {
-            StdOut.println("Error writing file '" + fileName + "'");
-        }
         MainMenu(scores);
     }
 }
