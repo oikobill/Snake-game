@@ -1,10 +1,10 @@
 public class Game {
-    private int windowHeight;
-    private int windowWidth;
-    private int[][] board;
-    private int[] head_coordinates;
-    private int[] butt_coordinates;
-    private String current_direction;
+    int windowHeight;
+    int windowWidth;
+    int[][] board;
+    int[] head_coordinates;
+    int[] butt_coordinates;
+    String current_direction;
     
     public Game() {
         this.windowWidth=60;
@@ -83,10 +83,24 @@ public class Game {
         this.drawWindow();
         this.initializeSnake(2);
         while (true) {
+        	//If up arrows are pressed
+        	if (StdDraw.isKeyPressed(38) && !(this.current_direction.equals("d"))) {
+        			this.current_direction = "u";
+        		}
+        	else if (StdDraw.isKeyPressed(37) && !(this.current_direction.equals("r"))) {
+        			this.current_direction = "l";
+        		}
+        	else if (StdDraw.isKeyPressed(39) && !(this.current_direction.equals("l"))) {
+        			this.current_direction = "r";
+        		}
+        	else if (!(this.current_direction.equals("u")) && StdDraw.isKeyPressed(40)) {
+        			this.current_direction = "d";
+        		}
             this.render();
             StdDraw.show(100);
             try {
-                updateBoard(this.current_direction);
+                Update.updateBoard(this);
+                //System.out.println(current_direction);
             } catch(ArrayIndexOutOfBoundsException e) {
                 // Game Over Menu goes here!
                 Main.gameOver();
@@ -94,36 +108,7 @@ public class Game {
             
         }
     }
-    
-    public void updateBoard(String dir) {
-        if (dir.equals("r")) {
-            right();
-            return;
-        } else if(dir.equals("l")) {
-            //left();
-            return;
-        } else if(dir.equals("u")) {
-            //up();
-            return;
-        } else if(dir.equals("d")) {
-            //down();
-            return;
-        }
-        
-    }
-    
-    public void right() {
-        //head update
-        this.board[this.head_coordinates[0]+1][this.head_coordinates[1]] = 2;
-        this.board[this.head_coordinates[0]][this.head_coordinates[1]] = 1;
-        this.head_coordinates[0]++;
-        
-        //head update
-        this.board[this.butt_coordinates[0]][this.head_coordinates[1]] = 0;
-        this.butt_coordinates[0]++;
-        this.render();
-    }
-    
+
     public static void main(String[] args) {
         Game game = new Game();
         game.startGame();

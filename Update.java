@@ -1,28 +1,43 @@
 public class Update {
-	/* direction in which the snake is heading: 
-	'u' -> up
-	'd' -> down
-	'l' -> left
-	'r' -> right
-	*/ 
-	// char direction;
-	int[][] board;
-	int[] head;
-	int[] butt;
-
-	public Update(int[][] board) {
-		// this.direction = direction;
-		this.board = board;
-	}
-
-	public int[][] updateBoard() {
-		int[][] tmp = new int[2][];
-		this.head[0] = head[0]+1;
-		this.head[1] = head[1];
-		this.butt[0] = butt[0]+1;
-		this.butt[1] = butt[1];
-		tmp[0] = head;
-		tmp[1] = butt;
-		return tmp;
-	}
+        public static void updateBoard(Game game) {
+            if (game.current_direction.equals("r")) {
+                right(game);
+                return;
+            } else if(game.current_direction.equals("l")) {
+                left(game);
+                return;
+            } else if(game.current_direction.equals("u")) {
+                up(game);
+                return;
+            } else if(game.current_direction.equals("d")) {
+                down(game);
+                return;
+            }
+        }
+        
+        public static void right(Game game) {
+            //head update
+            game.board[game.head_coordinates[0]+1][game.head_coordinates[1]] = 2;
+            game.board[game.head_coordinates[0]][game.head_coordinates[1]] = 1;
+            game.head_coordinates[0]++;
+        } 
+        public static void left(Game game) {
+                //head update
+                game.board[game.head_coordinates[0]-1][game.head_coordinates[1]] = 2;
+                game.board[game.head_coordinates[0]][game.head_coordinates[1]] = 1;
+                game.head_coordinates[0]--;
+        }
+        public static void up(Game game) {
+                //head update
+                game.board[game.head_coordinates[0]][game.head_coordinates[1]+1] = 2;
+                game.board[game.head_coordinates[0]][game.head_coordinates[1]] = 1;
+                game.head_coordinates[1]++;
+        }
+        public static void down(Game game) {
+                //head update
+                game.board[game.head_coordinates[0]][game.head_coordinates[1]-1] = 2;
+                game.board[game.head_coordinates[0]][game.head_coordinates[1]] = 1;
+                game.head_coordinates[1]--;
+        }
 }
+
