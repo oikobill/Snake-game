@@ -4,6 +4,7 @@ public class Game {
 	private int[][] board;
 	private int[] head_coordinates;
 	private int[] butt_coordinates;
+	private String current_direction;
 
 	public Game() {
 		this.windowWidth=60;
@@ -15,6 +16,7 @@ public class Game {
 		this.head_coordinates[1] = windowHeight/2;
 		this.butt_coordinates[0] = windowWidth/2 - 4;
 		this.butt_coordinates[1] = windowHeight/2;
+		this.current_direction = "r";
 		}
 
 	public Game(int height, int width) {
@@ -25,6 +27,7 @@ public class Game {
 		this.head_coordinates[1] = windowHeight/2;
 		this.butt_coordinates[0] = windowWidth/2 - 4;
 		this.butt_coordinates[1] = windowHeight/2;
+		this.current_direction = "r";
 	}
 
 	public void drawWindow() {
@@ -82,7 +85,7 @@ public class Game {
         	this.render();
         	StdDraw.show(100);
         	try {
-        		updateBoard();
+        		updateBoard(this.current_direction);
         	} catch(ArrayIndexOutOfBoundsException e) {
         		// Game Over Menu goes here!
         		System.out.println("Exception"+ e+" caught!");
@@ -92,7 +95,24 @@ public class Game {
         }
     }
     
-	public void updateBoard() {
+	public void updateBoard(String dir) {
+		if (dir.equals("r")) {
+			right();
+			return;
+		} else if(dir.equals("l")) {
+			//left();
+			return;
+		} else if(dir.equals("u")) {
+			//up();
+			return;
+		} else if(dir.equals("d")) {
+			//down();
+			return;
+		}
+
+	}
+
+	public void right() {
 		//head update
 		this.board[this.head_coordinates[0]+1][this.head_coordinates[1]] = 2;
 		this.board[this.head_coordinates[0]][this.head_coordinates[1]] = 1;
