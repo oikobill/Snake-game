@@ -2,17 +2,27 @@ public class Game {
 	private int windowHeight;
 	private int windowWidth;
 	private int[][] board;
+	private int[] head_coordinates = new int[2];
+	private int[] butt_coordinates = new int[2];
 
 	public Game() {
 		this.windowWidth=60;
 		this.windowHeight=60;
 		this.board = new int[60][60];
-	}
+		this.head_coordinates[0] = windowWidth/2;
+		this.head_coordinates[1] = windowHeight/2;
+		this.butt_coordinates[0] = windowWidth/2 - 4;
+		this.butt_coordinates[1] = windowHeight/2;
+		}
 
 	public Game(int height, int width) {
 		this.windowWidth=width;
 		this.windowHeight=height;
 		this.board = new int[width][height];
+		this.head_coordinates[0] = windowWidth/2;
+		this.head_coordinates[1] = windowHeight/2;
+		this.butt_coordinates[0] = windowWidth/2 - 4;
+		this.butt_coordinates[1] = windowHeight/2;
 	}
 
 	public void drawWindow() {
@@ -35,15 +45,14 @@ public class Game {
 
 	public void initializeSnake(int num_foods) {
 		// set head
-		board[windowHeight/2][windowHeight/2] = 1;
+		board[head_coordinates[0]][head_coordinates[1]] = 1;
 		for (int i=1; i<=3; i++) {
-			board[windowHeight/2 - i][windowHeight/2] = 2;
+			board[windowWidth/2 - i][windowHeight/2] = 2;
 		}
 		// set butt
-		board[windowHeight/2 - 4][windowHeight / 2] =  3;
+		board[butt_coordinates[0]][butt_coordinates[1]] =  3;
 
 		// randomly generate food
-
 		generate_food(num_foods);
 
 	}
@@ -64,11 +73,10 @@ public class Game {
 			}
 		}
 	}
-
-    public static void main(String[] args) {  
+    public void playGame() {  
     	Game game = new Game();    
         game.drawWindow();
-        game.initializeSnake(2); // deal somehow with default num_foods
+        game.initializeSnake(2);
         game.render();
     }
 }
