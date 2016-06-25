@@ -3,6 +3,7 @@ import java.util.PriorityQueue;
 
 public class Main {
     
+    // High Scores Screen
      public static void highScores(int[] scores)
     {
         // High Score Dimensions
@@ -19,6 +20,7 @@ public class Main {
         StdDraw.setPenColor(StdDraw.BLACK);
         StdDraw.text(8.0, 13.0, "High Scores");
         
+        // create Main Body
         StdDraw.setPenColor(StdDraw.GRAY);
         StdDraw.filledRectangle(8.0, 6.0, 2.0, 5.5);
         
@@ -33,12 +35,13 @@ public class Main {
             StdDraw.text(8.0, 10.5 - i, scores[i] + "");
        }
                 
-        // Return Button
+        // Back Button
         StdDraw.setPenColor(StdDraw.GRAY);
         StdDraw.filledRectangle(14.5, 0.5, 1.5, 0.5);
         StdDraw.setPenColor(StdDraw.BLACK);
         StdDraw.text(14.5, 0.5, "Back");
         
+        // Button Functionality
          while (true) 
         {
             if (StdDraw.mousePressed())
@@ -53,6 +56,7 @@ public class Main {
          }        
     }
      
+    // GameOver screen 
     public static void gameOver(int[] scores, int current_score) 
     {   StdDraw.clear();    
         
@@ -62,7 +66,7 @@ public class Main {
         
         // Game Over Background        
         //StdDraw.picture(8.0, 8.0, "gameover.png");
-        String fileName = "HighScores.txt";
+        String fileName = "txt/HighScores.txt";
         int temp1 = 0;
         int temp2 = 0;
         
@@ -71,8 +75,7 @@ public class Main {
         {
             if (current_score > scores[i])
             {
-                temp1 = scores[i];
-                
+                temp1 = scores[i];                
                 for (int j = i; j < 9; j++)
                 {
                     temp2 = scores[j + 1];
@@ -95,9 +98,6 @@ public class Main {
                 bufferedWriter.write("" + scores[i]);
                 bufferedWriter.newLine();
             }
-            
-            //bufferedWriter.write("" + lastScore);
-            
             bufferedWriter.close();
         }
         
@@ -107,14 +107,14 @@ public class Main {
         }
         
         // Main Menu High Scores
-        StdDraw.picture(8.0, 8.0, "blanksquare.png");
+        StdDraw.picture(8.0, 8.0, "buttons/blanksquare.png");
         StdDraw.text(8.0, 8.0, "Score: "+current_score);
         
         // Main Menu Retry
-        StdDraw.picture(8.0, 4.0, "retry.png");
+        StdDraw.picture(8.0, 4.0, "buttons/retry.png");
         
         // Main Menu Retry
-        StdDraw.picture(8.0, 1.0, "menu.png");        
+        StdDraw.picture(8.0, 1.0, "buttons/menu.png");        
         StdDraw.show();
         
         while(true){
@@ -138,7 +138,7 @@ public class Main {
             }
         }
     }
-    
+    // Main Menu Screen
     public static void MainMenu(int [] scores){
         
         // Main Menu dimensions
@@ -148,14 +148,15 @@ public class Main {
         // Main Menu Background        
         
         // Main Menu Play
-        StdDraw.picture(8.0, 10.0, "play.png");
+        StdDraw.picture(8.0, 10.0, "buttons/play.png");
         
         // Main Menu High Scores
-        StdDraw.picture(8.0, 6.0, "highscore.png");
+        StdDraw.picture(8.0, 6.0, "buttons/highscore.png");
         
         // Main Menu Exit
-        StdDraw.picture(8.0, 2.0, "exit.png");
+        StdDraw.picture(8.0, 2.0, "buttons/exit.png");
         
+        // Buttons Functionality
         while (true) 
         {
             if (StdDraw.mousePressed())
@@ -189,8 +190,7 @@ public class Main {
         PriorityQueue<Integer> queue = new PriorityQueue<Integer>(10);
         
         // read high scores from txt file
-        String fileName = "HighScores.txt";
-        
+        String fileName = "txt/HighScores.txt";        
         try
         {
             FileReader fileReader = new FileReader(fileName);
@@ -211,12 +211,12 @@ public class Main {
             StdOut.println("Error reading file '" + fileName + "'");
         }
 
+        // move elements from Priority Queue to Array
         int[] scores = new int[10];
         for (int i = 0; i < 10; i++)
             {
                 scores[i] = -1*queue.poll();
-            }
-        
+            }        
         MainMenu(scores);
     }
 }
