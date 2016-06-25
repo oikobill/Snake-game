@@ -1,6 +1,7 @@
 public class Main {
-    public static void MainMenu(){
-      
+
+       public static void main(String[] args) {
+         while(true) {
             // Main Menu dimensions
             StdDraw.setXscale(0.0, 16.0);
             StdDraw.setYscale(0.0, 16.0);
@@ -29,12 +30,11 @@ public class Main {
                     // if Play clicked
                     else if (StdDraw.mouseX() >= 4.0 && StdDraw.mouseX() <= 12.0 &&
                              StdDraw.mouseY() >= 9.0 && StdDraw.mouseY() <= 11.0) 
-                    {                                        
+                    {  
                         Game game = new Game();    
                         game.drawWindow();
                         game.initializeSnake(2); // deal somehow with default num_foods
                         game.render();
-                        break;
                     }
                     // if High Scores clicked
                     else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 &&
@@ -47,8 +47,7 @@ public class Main {
                 }
                 
             }
-     }
-     public static void main(String[] args) {
-         while(true) MainMenu();
+
+         }
     }
 }
