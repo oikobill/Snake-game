@@ -14,6 +14,13 @@ Description
 
 This is a classic game of snake in an app-like form. To run the project just clone the repo, go into the Snake-game folder and run `java Main` in your terminal. 
 
+Pictures
+---------
+![alt text](https://raw.githubusercontent.com/oikobill/Snake-game/master/screenshots/main_menu.png "Main Menu")
+![alt text](https://raw.githubusercontent.com/oikobill/Snake-game/master/screenshots/game_screen.png "Game Screen")
+![alt text](https://raw.githubusercontent.com/oikobill/Snake-game/master/screenshots/gameover.png "Game Over")
+![alt text](https://raw.githubusercontent.com/oikobill/Snake-game/master/screenshots/highscores.png "High Scores")
+
 
 Documentation
 ------------
@@ -29,7 +36,7 @@ Documentation
 References for backgrounds and icons
 --------------------------------------
 
-**Backgrounds: **
+**Backgrounds:**
 
 
 game.png: http://www.kongregate.com/forums/5-the-arts/topics/196388-group-prophets-of-pixels-two?page=49
