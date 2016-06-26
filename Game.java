@@ -23,11 +23,12 @@ public class Game {
     int[] scores;
     //current score
     int current_score=0;
+
     
     public Game(int[] scores) {
-        this.windowWidth=40;
-        this.windowHeight=40;
-        this.board = new int[this.windowWidth][this.windowHeight];
+        this.windowWidth=60;
+        this.windowHeight=60;
+        this.board = new int[windowWidth][windowHeight];
         head_coordinates = new int[2];
         butt_coordinates = new int[2];
         this.head_coordinates[0] = windowWidth/2;
@@ -53,7 +54,8 @@ public class Game {
             do {
                 x_cor = (int) (Math.random()*this.windowWidth);
                 y_cor = (int) (Math.random()*this.windowHeight);
-            } while(this.board[x_cor][y_cor]!=0);
+            } while(this.board[x_cor][y_cor]!=0 && x_cor!=0 && x_cor!=windowWidth &&
+                y_cor!=0 && y_cor!=windowHeight);
             this.board[x_cor][y_cor]=4;
         }
     }
@@ -77,9 +79,9 @@ public class Game {
         // paint fence
         StdDraw.setPenColor(StdDraw.ORANGE);
         StdDraw.setPenRadius(0.025);
-        StdDraw.line(0.0, 0.0, 0.0, this.windowHeight());
-        StdDraw.line(60.0, this.windowHeight(), 0.0, this.windowHeight());
-        StdDraw.line(60.0, 0.0, 60.0, this.windowHeight());
+        StdDraw.line(0.0, 0.0, 0.0, 60.0);
+        StdDraw.line(60.0, 60.0, 0.0, 60.0);
+        StdDraw.line(60.0, 0.0, 60.0, 60.0);
         StdDraw.line(60.0, 0.0, 0.0, 0.0);
         
         // render snake
