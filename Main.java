@@ -30,11 +30,15 @@ public class Main {
         StdDraw.setPenColor(StdDraw.WHITE);
         font = new Font("Arial", Font.PLAIN, 20);
         StdDraw.setFont(font);
+        
+        // print list
         for (int i = 0; i < 10; i++) 
         { 
-            StdDraw.text(6.5, 11.5 - i, i+1 +": "+playernames[i]+" "+scores[i] + "");
+            StdDraw.text(6.5, 11.5 - i, i + 1 +": ");
+            StdDraw.text(8.5, 11.5 - i, "" + playernames[i]);
+            StdDraw.text(10.5, 11.5 - i, "" + scores[i]);
         }
-                
+        
         // Back Button
         StdDraw.setPenColor(StdDraw.GRAY);
         StdDraw.filledRectangle(14.5, 0.5, 1.5, 0.5);
@@ -180,8 +184,8 @@ public class Main {
             if (StdDraw.mousePressed())
             {
                 //  if Exit clicked, exit the program
-                if (StdDraw.mouseX() >= 15.5 && StdDraw.mouseX() <= 16.0 &&
-                    StdDraw.mouseY() >= 15.5 && StdDraw.mouseY() <= 16.0) 
+                if (StdDraw.mouseX() >= 15.0 && StdDraw.mouseX() <= 16.0 &&
+                    StdDraw.mouseY() >= 15.0 && StdDraw.mouseY() <= 16.0) 
                 {
                     System.exit(0);
                 }
