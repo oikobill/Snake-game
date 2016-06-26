@@ -14,11 +14,11 @@ public class Main {
         StdDraw.setYscale(0.0, 16.0);
         
         // High Scores Background
-        StdDraw.picture(8.0, 8.0, "backgrounds/stars.jpg");
+        StdDraw.picture(8.0, 8.0, "backgrounds/hs.png");
        
         // High Scores Title
-        StdDraw.setPenColor(StdDraw.YELLOW);
-        Font font = new Font("Arial", Font.BOLD, 30);
+        StdDraw.setPenColor(StdDraw.WHITE);
+        Font font = new Font("Cabin Sketch", Font.BOLD, 30);
         StdDraw.setFont(font);
         StdDraw.text(8.0, 13.0, "High Scores");
         
@@ -28,22 +28,24 @@ public class Main {
         
         // create list of high scores
         StdDraw.setPenColor(StdDraw.WHITE);
-        font = new Font("Arial", Font.PLAIN, 20);
-        StdDraw.setFont(font);
         
         // print list
         for (int i = 0; i < 10; i++) 
         { 
-            StdDraw.text(6.5, 11.5 - i, i + 1 +": ");
-            StdDraw.text(8.5, 11.5 - i, "" + playernames[i]);
-            StdDraw.text(10.5, 11.5 - i, "" + scores[i]);
+            font = new Font("Cabin Sketch", Font.PLAIN, 20);
+            StdDraw.setFont(font);
+            StdDraw.text(6.5 - 0.75, 11.5 - i, i + 1 +".  ");
+            StdDraw.text(8.5 - 0.75, 11.5 - i, "" + playernames[i]);
+            font = new Font("Cabin Sketch", Font.BOLD, 20);
+            StdDraw.setFont(font);
+            StdDraw.text(10.5 - 0.75, 11.5 - i, " " + scores[i]);
         }
         
         // Back Button
-        StdDraw.setPenColor(StdDraw.GRAY);
-        StdDraw.filledRectangle(14.5, 0.5, 1.5, 0.5);
-        StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.text(14.5, 0.5, "Back");
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.rectangle(15, 0.7, 0.9, 0.5);
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.text(15, 0.65, "Back");
         
         // Button Functionality
          while (true) 
