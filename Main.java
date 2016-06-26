@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.PriorityQueue;
+import java.awt.Font;
 
 public class Main {
     
@@ -12,26 +13,28 @@ public class Main {
         
         // High Scores Background
         StdDraw.picture(8.0, 8.0, "backgrounds/stars.jpg");
-        
+       
         // High Scores Title
-        StdDraw.setPenColor(StdDraw.MAGENTA);
-        StdDraw.filledRectangle(8.0, 13.0, 4.0, 1.0);
-        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.setPenColor(StdDraw.YELLOW);
+        Font font = new Font("Arial", Font.BOLD, 30);
+        StdDraw.setFont(font);
         StdDraw.text(8.0, 13.0, "High Scores");
         
         // create Main Body
-        StdDraw.setPenColor(StdDraw.GRAY);
-        StdDraw.filledRectangle(8.0, 6.0, 2.0, 5.5);
+        //StdDraw.setPenColor(StdDraw.GRAY);
+        //StdDraw.filledRectangle(8.0, 6.0, 2.0, 5.5);
         
         // create list of high scores
-        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.setPenColor(StdDraw.WHITE);
+        font = new Font("Arial", Font.PLAIN, 20);
+        StdDraw.setFont(font);
         for (int i = 1; i <= 10; i++) 
         { 
-            StdDraw.text(7.0, 11.5 - i, i + ": ");
+            StdDraw.text(6.5, 11.5 - i, i + ": ");
         }
         for (int i = 0; i < 10; i++) 
         { 
-            StdDraw.text(8.0, 10.5 - i, scores[i] + "");
+            StdDraw.text(8.5, 10.5 - i, scores[i] + "");
        }
                 
         // Back Button
@@ -151,13 +154,13 @@ public class Main {
         StdDraw.picture(8.0, 14.0, "buttons/logo.png");
         StdDraw.picture(12.5, 14.0, "buttons/app_icon.png");
         // Main Menu Play
-        StdDraw.picture(8.0, 10.0, "buttons/play.png");
+        StdDraw.picture(8.0, 9.0, "buttons/play.png");
         
         // Main Menu High Scores
-        StdDraw.picture(8.0, 6.0, "buttons/highscore.png");
+        StdDraw.picture(8.0, 5.0, "buttons/highscore.png");
         
         // Main Menu Exit
-        StdDraw.picture(8.0, 2.0, "buttons/exit.png");
+        StdDraw.picture(15.5, 15.5, "buttons/exit_icon.png");
         
         // Buttons Functionality
         while (true) 
@@ -165,25 +168,24 @@ public class Main {
             if (StdDraw.mousePressed())
             {
                 //  if Exit clicked, exit the program
-                if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 &&
-                    StdDraw.mouseY() >= 1.5 && StdDraw.mouseY() <= 3.6) 
+                if (StdDraw.mouseX() >= 15.5 && StdDraw.mouseX() <= 16.0 &&
+                    StdDraw.mouseY() >= 15.5 && StdDraw.mouseY() <= 16.0) 
                 {
                     System.exit(0);
                 }
                 // if Play clicked
                 else if (StdDraw.mouseX() >= 4.0 && StdDraw.mouseX() <= 12.0 &&
-                         StdDraw.mouseY() >= 9.0 && StdDraw.mouseY() <= 11.0) 
+                         StdDraw.mouseY() >= 8.0 && StdDraw.mouseY() <= 10.0) 
                 {  
                     Game game = new Game(scores);
                     game.startGame();
                 }
                 // if High Scores clicked
                 else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 &&
-                         StdDraw.mouseY() >= 5.0 && StdDraw.mouseY() <= 7.0) 
+                         StdDraw.mouseY() >= 4.0 && StdDraw.mouseY() <= 6.0) 
                 {
                     StdDraw.clear();
-                    highScores(scores);
-                    
+                    highScores(scores);                    
                 }                
             }          
         }
