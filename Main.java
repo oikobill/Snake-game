@@ -83,7 +83,20 @@ public class Main {
         StdDraw.setYscale(0.0, 16.0);
         
         // Game Over Background        
-        //StdDraw.picture(8.0, 8.0, "gameover.png");
+        StdDraw.picture(8.0, 8.0, "backgrounds/gameover.jpg", 16.0, 16.0);
+        
+        // High Scores Title
+        StdDraw.setPenColor(StdDraw.GREEN);
+        Font font = new Font("Cabin Sketch", Font.BOLD, 50);
+        StdDraw.setFont(font);
+        StdDraw.text(8.0, 13.0, "Game Over");
+        
+        // revert Font
+        StdDraw.setPenColor(StdDraw.BLACK);
+        font = new Font("Arial", Font.PLAIN, 40);
+        StdDraw.setFont(font);
+                
+        // record Score
         String fileName = "txt/HighScores.txt";
         int temp1 = 0;
         int temp2 = 0;
@@ -137,31 +150,41 @@ public class Main {
             StdOut.println("Error writing file '" + fileName + "'");
         }
         
-        // Main Menu High Scores
-        StdDraw.picture(8.0, 8.0, "buttons/blanksquare.png");
-        StdDraw.text(8.0, 8.0, "Score: "+current_score);
+        // Game Over - Score Box
+        StdDraw.picture(8.0, 9.5, "buttons/blanksquare.png");
+        StdDraw.text(8.0, 9.5, "Score: "+current_score);
         
-        // Main Menu Retry
-        StdDraw.picture(8.0, 4.0, "buttons/retry.png");
+        // Game Over  - Retry button
+        StdDraw.picture(8.0, 5.5, "buttons/retry.png");
         
-        // Main Menu Retry
-        StdDraw.picture(8.0, 1.0, "buttons/menu.png");        
+        // Game Over - Main Menu button
+        StdDraw.picture(8.0, 2.5, "buttons/menu.png");        
         StdDraw.show();
         
+        // Main Menu Exit
+        StdDraw.picture(15.5, 15.5, "buttons/exit_icon.png");
+                
         while(true){
             // Button Interactions
             if (StdDraw.mousePressed()) 
-            {       
+            {    
+                // if Exit button clicked
+                if (StdDraw.mouseX() >= 15.0 && StdDraw.mouseX() <= 16.0 &&
+                    StdDraw.mouseY() >= 15.0 && StdDraw.mouseY() <= 16.0) 
+                {
+                    System.exit(0);
+                }                
+                
                 // if Retry clicked, initiate new Game
-                if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 && 
-                    StdDraw.mouseY() >= 4.0 && StdDraw.mouseY() <= 7.0) 
+                else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 && 
+                         StdDraw.mouseY() >= 5.5 && StdDraw.mouseY() <= 8.5) 
                 {
                     Game game = new Game(scores);
                     game.startGame();               
                 }
                 // if Main Menu button clicked, return to Main Menu
                 else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 
-                             && StdDraw.mouseY() >= 0.0 && StdDraw.mouseY() <=  3.0) 
+                             && StdDraw.mouseY() >= 1.5 && StdDraw.mouseY() <=  4.5) 
                 { 
                     StdDraw.clear();
                     MainMenu(scores);    
