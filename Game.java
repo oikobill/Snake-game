@@ -19,13 +19,10 @@ public class Game {
     int[] butt_coordinates;
     // which way the snake is moving (which one was the last arrow pressed)
     String current_direction;
-    // last top 10 scores
-    int[] scores;
     //current score
     int current_score=0;
-
     
-    public Game(int[] scores) {
+    public Game() {
         this.windowWidth=40;
         this.windowHeight=40;
         this.board = new int[windowWidth][windowHeight];
@@ -36,7 +33,6 @@ public class Game {
         this.butt_coordinates[0] = windowWidth/2 - 4;
         this.butt_coordinates[1] = windowHeight/2;
         this.current_direction = "r";
-        this.scores = scores;
     }
     
     public void drawWindow() {
@@ -133,7 +129,7 @@ public class Game {
                 Update.updateBoard(this);
             } catch(Exception e) {
                 // Game Over Menu goes here!
-                Main.gameOver(this.scores, this.current_score);
+                Main.gameOver(this.current_score);
             }
             
         }

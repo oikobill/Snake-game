@@ -4,10 +4,12 @@ import java.awt.Font;
 import javax.swing.JOptionPane;
 
 public class Main {
+    // global variables holding the names and scores of the 10 highest scoring players
      static String[] playernames = new String[10];
+     static int[] scores = new int [10];
 
     // High Scores Screen
-     public static void highScores(int[] scores)
+     public static void highScores()
     {
         // High Score Dimensions
         StdDraw.setXscale(0.0, 16.0);
@@ -56,14 +58,14 @@ public class Main {
                     StdDraw.mouseY() >= 0.0 && StdDraw.mouseY() <= 1.0)
                 {
                     StdDraw.clear();
-                    MainMenu(scores);
+                    MainMenu();
                 }
             }            
          }        
     }
      
     // GameOver screen 
-    public static void gameOver(int[] scores, int current_score) 
+    public static void gameOver(int current_score) 
     {   StdDraw.clear();    
         // input username
         String current_name = JOptionPane.showInputDialog ( "Game Over! Enter player name (max 9 characters):" ); 
@@ -179,7 +181,7 @@ public class Main {
                 else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 && 
                          StdDraw.mouseY() >= 5.5 && StdDraw.mouseY() <= 8.5) 
                 {
-                    Game game = new Game(scores);
+                    Game game = new Game();
                     game.startGame();               
                 }
                 // if Main Menu button clicked, return to Main Menu
@@ -187,13 +189,13 @@ public class Main {
                              && StdDraw.mouseY() >= 1.5 && StdDraw.mouseY() <=  4.5) 
                 { 
                     StdDraw.clear();
-                    MainMenu(scores);    
+                    MainMenu();    
                 }           
             }
         }
     }
     // Main Menu Screen
-    public static void MainMenu(int [] scores){
+    public static void MainMenu(){
         
         // Main Menu dimensions
         StdDraw.setXscale(0.0, 16.0);
@@ -229,7 +231,7 @@ public class Main {
                 else if (StdDraw.mouseX() >= 4.0 && StdDraw.mouseX() <= 12.0 &&
                          StdDraw.mouseY() >= 8.0 && StdDraw.mouseY() <= 10.0) 
                 {  
-                    Game game = new Game(scores);
+                    Game game = new Game();
                     game.startGame();
                 }
                 // if High Scores clicked
@@ -237,7 +239,7 @@ public class Main {
                          StdDraw.mouseY() >= 4.0 && StdDraw.mouseY() <= 6.0) 
                 {
                     StdDraw.clear();
-                    highScores(scores);                    
+                    highScores();                    
                 }                
             }          
         }
@@ -274,11 +276,10 @@ public class Main {
         }
 
         // move elements from Priority Queue to Array
-        int[] scores = new int[10];
         for (int i = 0; i < 10; i++)
             {
                 scores[i] = -1*queue.poll();
             }        
-        MainMenu(scores);
+        MainMenu();
     }
 }
