@@ -61,6 +61,11 @@ public class Main {
     {   StdDraw.clear();    
         // input username
         String current_name = JOptionPane.showInputDialog ( "Game Over! Enter player name:" ); 
+        // if the user does not give a player name the string becomes 
+        // "Uknown player name"
+        if (current_name==null) {
+            current_name = "Unknown Player";
+        }
         // Game Over screen dimensions
         StdDraw.setXscale(0.0, 16.0);
         StdDraw.setYscale(0.0, 16.0);

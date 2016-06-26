@@ -54,8 +54,8 @@ public class Game {
             do {
                 x_cor = (int) (Math.random()*this.windowWidth);
                 y_cor = (int) (Math.random()*this.windowHeight);
-            } while(this.board[x_cor][y_cor]!=0 && x_cor!=0 && x_cor!=windowWidth &&
-                y_cor!=0 && y_cor!=windowHeight);
+            } while(this.board[x_cor][y_cor]!=0 && x_cor==0 || x_cor==windowWidth-1 ||
+                y_cor==0 || y_cor==windowHeight-1);
             this.board[x_cor][y_cor]=4;
         }
     }
