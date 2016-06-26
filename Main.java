@@ -68,7 +68,7 @@ public class Main {
     public static void gameOver(int current_score) 
     {   StdDraw.clear();    
         // input username
-        String current_name = JOptionPane.showInputDialog ( "Game Over! Enter player name (max 9 characters):" ); 
+        String current_name = JOptionPane.showInputDialog ( "                   Game Over! \n Enter player name (max 9 characters):" ); 
         // if the user does not give a player name the string becomes 
         // "Uknown player name"
         if (current_name==null) {
