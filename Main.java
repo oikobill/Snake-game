@@ -11,8 +11,7 @@ public class Main {
         StdDraw.setYscale(0.0, 16.0);
         
         // High Scores Background
-        StdDraw.setPenColor(StdDraw.WHITE);
-        StdDraw.filledSquare(8.0, 8.0, 8.0);
+        StdDraw.picture(8.0, 8.0, "backgrounds/stars.jpg");
         
         // High Scores Title
         StdDraw.setPenColor(StdDraw.MAGENTA);
@@ -145,8 +144,12 @@ public class Main {
         StdDraw.setXscale(0.0, 16.0);
         StdDraw.setYscale(0.0, 16.0);
         
-        // Main Menu Background        
-        
+        // Main Menu backgrounds
+        StdDraw.picture(10.0, 10.0, "backgrounds/main_backround.png");
+
+        // Main Menu icons        
+        StdDraw.picture(8.0, 14.0, "buttons/logo.png");
+        StdDraw.picture(12.5, 14.0, "buttons/app_icon.png");
         // Main Menu Play
         StdDraw.picture(8.0, 10.0, "buttons/play.png");
         
