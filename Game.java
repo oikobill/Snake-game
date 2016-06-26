@@ -84,20 +84,20 @@ public class Game {
         StdDraw.line(1.0 * this.windowWidth, 0.0, 1.0 * this.windowWidth, 1.0 * this.windowHeight);
         StdDraw.line(1.0 * this.windowWidth, 0.0, 0.0, 0.0);
         
-        // render snake
+        // render snake and food
         StdDraw.setPenRadius(0.005);
         for(int i=0; i<this.windowWidth; i++) {
             for (int j=0; j<this.windowHeight;j++) {
-                if (this.board[i][j]==1 || this.board[i][j] == 3) {
+               if (this.board[i][j]==4){      // food              
+                    StdDraw.picture(i+0.5, j+0.5, "buttons/mouse_icon.png", 2.0, 2.0) ;
+                }
+                else if (this.board[i][j]==1 || this.board[i][j] == 3) {
                     StdDraw.setPenColor(StdDraw.BLACK);
                     StdDraw.filledSquare(i+0.5, j+0.5, 0.5);
                 } else if (this.board[i][j]==2) {
                     StdDraw.setPenColor(StdDraw.RED);
                     StdDraw.filledSquare(i+0.5, j+0.5, 0.5);
-                } else if (this.board[i][j]==4){
-                    StdDraw.setPenColor(StdDraw.BLUE);
-                    StdDraw.filledSquare(i+0.5, j+0.5, 0.5);
-                }
+                } 
             }
         }
     }
