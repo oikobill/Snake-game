@@ -19,7 +19,7 @@ public class Update {
             }
         }
         
-        public static void right(Game game) throws IndexOutOfBoundsException {
+       private static void right(Game game) throws IndexOutOfBoundsException {
             // check if self eating
             if ((game.board[game.head_coordinates[0]+1][game.head_coordinates[1]]==1) ||
                 (game.board[game.head_coordinates[0]+1][game.head_coordinates[1]]==3)) {
@@ -29,13 +29,14 @@ public class Update {
             if (game.board[game.head_coordinates[0]+1][game.head_coordinates[1]]==4) {
                 game.current_score += 1; 
                 game.generate_food(1);
+                
             }
             //head update
             game.board[game.head_coordinates[0]+1][game.head_coordinates[1]] = 2;
             game.board[game.head_coordinates[0]][game.head_coordinates[1]] = 1;
             game.head_coordinates[0]++;
         } 
-        public static void left(Game game) throws IndexOutOfBoundsException {
+        private static void left(Game game) throws IndexOutOfBoundsException {
                 // check if self eating
                 if ((game.board[game.head_coordinates[0]-1][game.head_coordinates[1]]==1) ||
                     (game.board[game.head_coordinates[0]-1][game.head_coordinates[1]]==3)) {
@@ -45,6 +46,7 @@ public class Update {
                 if (game.board[game.head_coordinates[0]-1][game.head_coordinates[1]]==4) {
                     game.current_score += 1; 
                     game.generate_food(1);
+                    
                 }
                 
                 //head update
@@ -52,7 +54,7 @@ public class Update {
                 game.board[game.head_coordinates[0]][game.head_coordinates[1]] = 1;
                 game.head_coordinates[0]--;
         }
-        public static void up(Game game) throws IndexOutOfBoundsException {
+        private static void up(Game game) throws IndexOutOfBoundsException {
                 // check if self eating
             if ((game.board[game.head_coordinates[0]][game.head_coordinates[1]+1]==1) ||
                 (game.board[game.head_coordinates[0]][game.head_coordinates[1]+1]==3)) {
@@ -68,12 +70,12 @@ public class Update {
                 game.board[game.head_coordinates[0]][game.head_coordinates[1]] = 1;
                 game.head_coordinates[1]++;
         }
-        public static void down(Game game) throws IndexOutOfBoundsException {
+        private static void down(Game game) throws IndexOutOfBoundsException {
                 // check if self eating
                 if ((game.board[game.head_coordinates[0]][game.head_coordinates[1]-1]==1) ||
                     (game.board[game.head_coordinates[0]][game.head_coordinates[1]-1]==3)) {
                     throw new IndexOutOfBoundsException();
-                }
+                } 
                 // check if you eat food
                 if (game.board[game.head_coordinates[0]][game.head_coordinates[1]-1]==4) {
                         game.current_score += 1; 
@@ -85,9 +87,8 @@ public class Update {
                 game.head_coordinates[1]--;
         }
     
-        public static void butt(Game game) {
-        //butt update
-            //ensure no array out of bounds horizontally            
+       private static void butt(Game game) {
+        //butt updates          
             if(game.butt_coordinates[0] < game.windowWidth - 1  && game.board[game.butt_coordinates[0] + 1] [game.butt_coordinates[1]] == 1) {
                 game.board[game.butt_coordinates[0]] [game.butt_coordinates[1]] = 0;
                 game.butt_coordinates[0]++;
@@ -106,6 +107,14 @@ public class Update {
             }
         }
 }
+
+
+
+
+
+
+
+
 
 
 

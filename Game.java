@@ -3,6 +3,7 @@
 * 0 represents an empty tile 
 * 1 represents a tile occupied by the Snake's body
 * 2 represents the head of the Snake (represented with red in the app)
+* 3 represents the butt of the Snake
 * 4 Food tile
 */
 
@@ -86,7 +87,7 @@ public class Game {
         StdDraw.clear();
         for(int i=0; i<this.windowWidth; i++) {
             for (int j=0; j<this.windowHeight;j++) {
-                if (this.board[i][j]==1) {
+                if (this.board[i][j]==1 || this.board[i][j] == 3) {
                     StdDraw.setPenColor(StdDraw.BLACK);
                     StdDraw.filledSquare(i+0.5, j+0.5, 0.5);
                 } else if (this.board[i][j]==2) {
