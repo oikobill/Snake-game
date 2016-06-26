@@ -23,25 +23,14 @@ public class Game {
     int[] scores;
     //current score
     int current_score=0;
+
     
     public Game(int[] scores) {
         this.windowWidth=60;
         this.windowHeight=60;
-        this.board = new int[60][60];
+        this.board = new int[windowWidth][windowHeight];
         head_coordinates = new int[2];
         butt_coordinates = new int[2];
-        this.head_coordinates[0] = windowWidth/2;
-        this.head_coordinates[1] = windowHeight/2;
-        this.butt_coordinates[0] = windowWidth/2 - 4;
-        this.butt_coordinates[1] = windowHeight/2;
-        this.current_direction = "r";
-        this.scores = scores;
-    }
-    
-    public Game(int height, int width, int[] scores) {
-        this.windowWidth=width;
-        this.windowHeight=height;
-        this.board = new int[width][height];
         this.head_coordinates[0] = windowWidth/2;
         this.head_coordinates[1] = windowHeight/2;
         this.butt_coordinates[0] = windowWidth/2 - 4;
@@ -65,7 +54,8 @@ public class Game {
             do {
                 x_cor = (int) (Math.random()*this.windowWidth);
                 y_cor = (int) (Math.random()*this.windowHeight);
-            } while(this.board[x_cor][y_cor]!=0);
+            } while(this.board[x_cor][y_cor]!=0 && x_cor!=0 && x_cor!=windowWidth &&
+                y_cor!=0 && y_cor!=windowHeight);
             this.board[x_cor][y_cor]=4;
         }
     }

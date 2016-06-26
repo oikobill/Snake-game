@@ -1,9 +1,11 @@
 import java.io.*;
 import java.util.PriorityQueue;
 import java.awt.Font;
+import javax.swing.JOptionPane;
 
 public class Main {
-    
+     static String[] playernames = new String[10];
+
     // High Scores Screen
      public static void highScores(int[] scores)
     {
@@ -28,14 +30,10 @@ public class Main {
         StdDraw.setPenColor(StdDraw.WHITE);
         font = new Font("Arial", Font.PLAIN, 20);
         StdDraw.setFont(font);
-        for (int i = 1; i <= 10; i++) 
-        { 
-            StdDraw.text(6.5, 11.5 - i, i + ": ");
-        }
         for (int i = 0; i < 10; i++) 
         { 
-            StdDraw.text(8.5, 10.5 - i, scores[i] + "");
-       }
+            StdDraw.text(6.5, 11.5 - i, i+1 +": "+playernames[i]+" "+scores[i] + "");
+        }
                 
         // Back Button
         StdDraw.setPenColor(StdDraw.GRAY);
@@ -61,7 +59,8 @@ public class Main {
     // GameOver screen 
     public static void gameOver(int[] scores, int current_score) 
     {   StdDraw.clear();    
-        
+        // input username
+        String current_name = JOptionPane.showInputDialog ( "Game Over! Enter player name:" ); 
         // Game Over screen dimensions
         StdDraw.setXscale(0.0, 16.0);
         StdDraw.setYscale(0.0, 16.0);
@@ -71,21 +70,29 @@ public class Main {
         String fileName = "txt/HighScores.txt";
         int temp1 = 0;
         int temp2 = 0;
+        String temp3="";
+        String temp4="";
         
         // comparing last score (11th entry in file) to the 10 scores in array
         for (int i = 0; i < 10; i++)
         {
             if (current_score > scores[i])
             {
-                temp1 = scores[i];                
+                temp1 = scores[i];  
+                temp3 = playernames[i];              
                 for (int j = i; j < 9; j++)
                 {
                     temp2 = scores[j + 1];
                     scores[j + 1] = temp1;
                     temp1 = temp2; 
+                    ////////
+                    temp4 = playernames[j + 1];
+                    playernames[j + 1] = temp3;
+                    temp3 = temp4; 
                 }
                 
                 scores[i] = current_score;
+                playernames[i] = current_name;
                 break;
             }
         }
@@ -98,6 +105,11 @@ public class Main {
             for (int i = 0; i < 10; i++)
             {
                 bufferedWriter.write("" + scores[i]);
+                bufferedWriter.newLine();
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                bufferedWriter.write("" + playernames[i]);
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();
@@ -195,7 +207,8 @@ public class Main {
         PriorityQueue<Integer> queue = new PriorityQueue<Integer>(10);
         
         // read high scores from txt file
-        String fileName = "txt/HighScores.txt";        
+        String fileName = "txt/HighScores.txt"; 
+        // playernames array    
         try
         {
             FileReader fileReader = new FileReader(fileName);
@@ -205,6 +218,10 @@ public class Main {
             for (int i = 0; i < 10; i++)
             {
                 queue.add(-1*Integer.parseInt(bufferedReader.readLine()));
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                playernames[i]=bufferedReader.readLine();
             }
             bufferedReader.close();
         }catch (FileNotFoundException ex)

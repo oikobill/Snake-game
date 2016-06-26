@@ -1,10 +1,20 @@
 11
+6
+5
+4
 4
 3
 3
 3
-2
-2
-2
-2
-2
+3
+3
+Y1
+likos
+2 logoi
+Y2
+Vasilis
+Y4
+Y5
+V1
+Vasilis
+B
