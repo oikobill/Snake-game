@@ -54,7 +54,7 @@ public class Game {
             do {
                 x_cor = (int) (Math.random()*this.windowWidth);
                 y_cor = (int) (Math.random()*this.windowHeight);
-            } while(this.board[x_cor][y_cor]!=0 && x_cor==0 || x_cor==windowWidth-1 ||
+            } while(this.board[x_cor][y_cor]!=0 || x_cor==0 || x_cor==windowWidth-1 ||
                 y_cor==0 || y_cor==windowHeight-1);
             this.board[x_cor][y_cor]=4;
         }
@@ -75,7 +75,8 @@ public class Game {
     public void render() {
         // Renders the board
         StdDraw.clear();
-        
+        StdDraw.picture(windowWidth*0.5, windowHeight*0.5, 
+            "backgrounds/game.png", windowWidth*1.0, windowHeight*1.0);
         // paint fence
         StdDraw.setPenColor(StdDraw.ORANGE);
         StdDraw.setPenRadius(0.015);
@@ -89,7 +90,7 @@ public class Game {
         for(int i=0; i<this.windowWidth; i++) {
             for (int j=0; j<this.windowHeight;j++) {
                if (this.board[i][j]==4){      // food              
-                    StdDraw.picture(i+0.5, j+0.5, "buttons/mouse_icon.png", 2.0, 2.0) ;
+                    StdDraw.picture(i+0.5, j+0.5, "buttons/mouse_icon.png", 1.5, 1.5) ;
                 }
                 else if (this.board[i][j]==1 || this.board[i][j] == 3) {
                     StdDraw.setPenColor(StdDraw.BLACK);
