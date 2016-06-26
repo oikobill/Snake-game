@@ -85,6 +85,17 @@ public class Game {
     public void render() {
         // Renders the board
         StdDraw.clear();
+        
+        // paint fence
+        StdDraw.setPenColor(StdDraw.ORANGE);
+        StdDraw.setPenRadius(0.025);
+        StdDraw.line(0.0, 0.0, 0.0, 60.0);
+        StdDraw.line(60.0, 60.0, 0.0, 60.0);
+        StdDraw.line(60.0, 0.0, 60.0, 60.0);
+        StdDraw.line(60.0, 0.0, 0.0, 0.0);
+        
+        // render snake
+        StdDraw.setPenRadius(0.005);
         for(int i=0; i<this.windowWidth; i++) {
             for (int j=0; j<this.windowHeight;j++) {
                 if (this.board[i][j]==1 || this.board[i][j] == 3) {
