@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.PriorityQueue;
-
+import javax.script.*;
+import javax.swing.JOptionPane;
 public class Main {
     
     // High Scores Screen
@@ -58,7 +59,9 @@ public class Main {
     // GameOver screen 
     public static void gameOver(int[] scores, int current_score) 
     {   StdDraw.clear();    
-        
+        // Dialogue box input
+        String name = JOptionPane.showInputDialog("Player Name:");
+
         // Game Over screen dimensions
         StdDraw.setXscale(0.0, 16.0);
         StdDraw.setYscale(0.0, 16.0);
@@ -189,9 +192,7 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        
         PriorityQueue<Integer> queue = new PriorityQueue<Integer>(10);
-        
         // read high scores from txt file
         String fileName = "txt/HighScores.txt";        
         try
