@@ -5,6 +5,7 @@
 * 2 represents the head of the Snake (represented with red in the app)
 * 3 represents the butt of the Snake
 * 4 Food tile
+* 5 Obstacle tile
 */
 
 public class Game {
@@ -67,7 +68,23 @@ public class Game {
         for (int i=1; i<=4; i++) {
             board[windowWidth/2 - i][windowHeight/2] = 1;
         }
-                
+        //  initialize obstacles
+        for (int i=0; i<5;i++) {
+            int x = (int) (Math.random()*this.windowWidth);
+            int y = (int) (Math.random()*this.windowHeight);
+            if (x==0) x+=1;
+            else if (x==windowWidth-1) x-=1;
+            if (y==0) y+=1;
+            else if (y==windowHeight-1) y-=1;
+            if (board[x][y]==0) {
+                board[x][y] = 5;
+                board[x][y-1] = 5;
+                board[x-1][y] = 5;
+                board[x][y+1] = 5;
+                board[x+1][y] = 5;
+            }
+        }
+        
         // randomly generate food
         generate_food(num_foods);
     }
@@ -98,7 +115,10 @@ public class Game {
                 } else if (this.board[i][j]==2) {
                     StdDraw.setPenColor(StdDraw.RED);
                     StdDraw.filledSquare(i+0.5, j+0.5, 0.5);
-                } 
+                } else if (this.board[i][j]==5) {
+                    StdDraw.setPenColor(StdDraw.BLUE);
+                    StdDraw.filledSquare(i+0.5, j+0.5, 0.5);
+                }
             }
         }
     }
@@ -137,12 +157,7 @@ public class Game {
             } else {
                 StdDraw.show(render_time-current_score/2);
             }
-            
-            // game goes twice as fast every 5 points you get
-            // if (current_score%5==0 && current_score!=previous_score) {
-            //     render_time/=2;
-            //     previous_score = current_score;
-            // }
+
             try {
                 Update.updateBoard(this);
             } catch(Exception e) {

@@ -25,6 +25,10 @@ public class Update {
             (game.board[game.head_coordinates[0]+1][game.head_coordinates[1]]==3)) {
             throw new IndexOutOfBoundsException();
         }
+        // Check if ypu hit an obstacle
+        if ((game.board[game.head_coordinates[0]+1][game.head_coordinates[1]]==5)) {
+            throw new IndexOutOfBoundsException();
+        }
         // check if you eat food
         if (game.board[game.head_coordinates[0]+1][game.head_coordinates[1]]==4) {
             game.current_score += 1; 
@@ -40,6 +44,10 @@ public class Update {
         // check if self eating
         if ((game.board[game.head_coordinates[0]-1][game.head_coordinates[1]]==1) ||
             (game.board[game.head_coordinates[0]-1][game.head_coordinates[1]]==3)) {
+            throw new IndexOutOfBoundsException();
+        }
+        // Check if ypu hit an obstacle
+        if ((game.board[game.head_coordinates[0]-1][game.head_coordinates[1]]==5)) {
             throw new IndexOutOfBoundsException();
         }
         // check if you eat food
@@ -59,6 +67,10 @@ public class Update {
             (game.board[game.head_coordinates[0]][game.head_coordinates[1]+1]==3)) {
             throw new IndexOutOfBoundsException();
         }
+        // Check if ypu hit an obstacle
+        if ((game.board[game.head_coordinates[0]][game.head_coordinates[1]+1]==5)) {
+            throw new IndexOutOfBoundsException();
+        }
         // check if you eat food
         if (game.board[game.head_coordinates[0]][game.head_coordinates[1]+1]==4) {
             game.current_score += 1; 
@@ -76,6 +88,10 @@ public class Update {
             (game.board[game.head_coordinates[0]][game.head_coordinates[1]-1]==3)) {
             throw new IndexOutOfBoundsException();
         } 
+        // Check if ypu hit an obstacle
+        if ((game.board[game.head_coordinates[0]][game.head_coordinates[1]-1]==5)) {
+            throw new IndexOutOfBoundsException();
+        }
         // check if you eat food
         if (game.board[game.head_coordinates[0]][game.head_coordinates[1]-1]==4) {
             game.current_score += 1; 
