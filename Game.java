@@ -21,6 +21,10 @@ public class Game {
     String current_direction;
     //current score
     int current_score=0;
+    // render time 
+    int render_time = 130;
+    // previous score
+    int previous_score=0;
     
     public Game() {
         this.windowWidth=40;
@@ -124,7 +128,21 @@ public class Game {
                 this.current_direction = "d";
             }
             this.render();
-            StdDraw.show(100);
+            if (render_time > 100) {
+                StdDraw.show(render_time-3*current_score);
+            } else if (render_time > 80){
+                StdDraw.show(render_time-2*current_score);
+            } else if (render_time > 60){
+                StdDraw.show(render_time-1*current_score);
+            } else {
+                StdDraw.show(render_time-current_score/2);
+            }
+            
+            // game goes twice as fast every 5 points you get
+            // if (current_score%5==0 && current_score!=previous_score) {
+            //     render_time/=2;
+            //     previous_score = current_score;
+            // }
             try {
                 Update.updateBoard(this);
             } catch(Exception e) {
