@@ -7,6 +7,7 @@ public class Main {
     // global variables holding the names and scores of the 10 highest scoring players
      static String[] playernames = new String[10];
      static int[] scores = new int [10];
+     static int difficulty = 1;
 
     // High Scores Screen
      public static void highScores()
@@ -23,10 +24,6 @@ public class Main {
         Font font = new Font("Cabin Sketch", Font.BOLD, 30);
         StdDraw.setFont(font);
         StdDraw.text(8.0, 13.0, "High Scores");
-        
-        // create Main Body
-        //StdDraw.setPenColor(StdDraw.GRAY);
-        //StdDraw.filledRectangle(8.0, 6.0, 2.0, 5.5);
         
         // create list of high scores
         StdDraw.setPenColor(StdDraw.WHITE);
@@ -54,6 +51,7 @@ public class Main {
         {
             if (StdDraw.mousePressed())
             {
+                // if Back Button clicked, return ro Main Menu
                 if (StdDraw.mouseX() >= 13.0 && StdDraw.mouseX() <= 16.0 &&
                     StdDraw.mouseY() >= 0.0 && StdDraw.mouseY() <= 1.0)
                 {
@@ -73,11 +71,6 @@ public class Main {
         // "Uknown player name"
         if (current_name==null) {
             current_name = "Unknown";
-        }
-
-        // Check that name input is less than 10 characters otherwise select 9 first
-        if (current_name.length()>9) {
-            current_name = current_name.substring(0, 9);
         }
 
         // Game Over screen dimensions
@@ -163,7 +156,7 @@ public class Main {
         StdDraw.picture(8.0, 2.5, "buttons/menu.png");        
         StdDraw.show();
         
-        // Main Menu Exit
+        // Game Over Exit
         StdDraw.picture(15.5, 15.5, "buttons/exit_icon.png");
                 
         while(true){
@@ -181,7 +174,7 @@ public class Main {
                 else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 && 
                          StdDraw.mouseY() >= 5.5 && StdDraw.mouseY() <= 8.5) 
                 {
-                    Game game = new Game();
+                    Game game = new Game(difficulty);
                     game.startGame();               
                 }
                 // if Main Menu button clicked, return to Main Menu
@@ -194,6 +187,79 @@ public class Main {
             }
         }
     }
+    
+    // Options Screen
+    public static void Options() {
+        // Options dimensions
+        StdDraw.setXscale(0.0, 16.0);
+        StdDraw.setYscale(0.0, 16.0);
+        
+        // Options - Background
+        StdDraw.picture(10.0, 10.0, "backgrounds/main_backround.png");
+        
+        // Options - Exit
+        StdDraw.picture(15.5, 15.5, "buttons/exit_icon.png");
+        
+        // Options - Difficulty
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.picture(8.0, 2.0, "buttons/blanksquare.png", 8.0, 1.7);
+        Font font = new Font("Arial", Font.PLAIN, 28);
+        StdDraw.setFont(font);        
+        StdDraw.text(8.0, 2.0, "Adjust Difficulty");                
+        
+       // Options - Back Button
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.rectangle(15, 0.7, 0.9, 0.5);
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.text(15, 0.65, "Back");
+        
+        // Options - Difficulty Box
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.picture(8.0, 9.5, "buttons/blanksquare.png");
+        StdDraw.text(8.0, 9.5, "Difficulty Level: "+ difficulty);           
+      
+        while(true){
+            // Button Interactions
+            if (StdDraw.mousePressed()) 
+            {    
+                // if Exit button clicked
+                if (StdDraw.mouseX() >= 15.0 && StdDraw.mouseX() <= 16.0 &&
+                    StdDraw.mouseY() >= 15.0 && StdDraw.mouseY() <= 16.0) 
+                {
+                    System.exit(0);
+                }  
+                // if Adjust difficulty clicked
+                else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 &&
+                         StdDraw.mouseY() >= 1.0 && StdDraw.mouseY() <= 3.0) 
+                {
+                    
+                    // check whether input is int
+                    try {
+                        difficulty = Integer.parseInt(JOptionPane.showInputDialog ("Enter difficulty level (1, 2, or 3): \n (1 = easy, 2 = medium, 3 = hard)"));
+                    } catch(Exception e) {
+                        difficulty = Integer.parseInt(JOptionPane.showInputDialog ("Please enter proper difficulty level (1, 2, or 3): \n (1 = easy, 2 = medium, 3 = hard)"));
+                    }
+                    
+                    //check whether difficulty level is not proper
+                    if( difficulty != 1 && difficulty != 2 && difficulty != 3) {
+                        difficulty = Integer.parseInt(JOptionPane.showInputDialog ("Please enter proper difficulty level (1, 2, or 3): \n (1 = easy, 2 = medium, 3 = hard)"));
+                    }
+                    
+                    //reset Options screen  once difficulty changed
+                    StdDraw.clear();
+                    Options();          
+                }   
+                // if Back Button clicked, return to Main Menu
+                if (StdDraw.mouseX() >= 13.0 && StdDraw.mouseX() <= 16.0 &&
+                    StdDraw.mouseY() >= 0.0 && StdDraw.mouseY() <= 1.0)
+                {
+                    StdDraw.clear();
+                    MainMenu();
+                }
+            }
+        }        
+    }
+    
     // Main Menu Screen
     public static void MainMenu(){
         
@@ -207,12 +273,20 @@ public class Main {
         // Main Menu icons        
         StdDraw.picture(8.0, 14.0, "buttons/logo.png");
         StdDraw.picture(12.5, 14.0, "buttons/app_icon.png");
+        
         // Main Menu Play
         StdDraw.picture(8.0, 9.0, "buttons/play.png");
         
         // Main Menu High Scores
         StdDraw.picture(8.0, 5.0, "buttons/highscore.png");
         
+        // Main Menu Options
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.picture(8.0, 2.0, "buttons/blanksquare.png", 8.0, 1.7);
+        Font font = new Font("Arial", Font.PLAIN, 28);
+        StdDraw.setFont(font);        
+        StdDraw.text(8.0, 2.0, "Options");
+                
         // Main Menu Exit
         StdDraw.picture(15.5, 15.5, "buttons/exit_icon.png");
         
@@ -231,7 +305,7 @@ public class Main {
                 else if (StdDraw.mouseX() >= 4.0 && StdDraw.mouseX() <= 12.0 &&
                          StdDraw.mouseY() >= 8.0 && StdDraw.mouseY() <= 10.0) 
                 {  
-                    Game game = new Game();
+                    Game game = new Game(difficulty);
                     game.startGame();
                 }
                 // if High Scores clicked
@@ -240,10 +314,18 @@ public class Main {
                 {
                     StdDraw.clear();
                     highScores();                    
-                }                
+                }  
+                // if Options clicked
+                else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 &&
+                         StdDraw.mouseY() >= 1.0 && StdDraw.mouseY() <= 3.0) 
+                {
+                    StdDraw.clear();
+                    Options();                    
+                }   
             }          
         }
     }
+    
     public static void main(String[] args) {
         
         PriorityQueue<Integer> queue = new PriorityQueue<Integer>(10);

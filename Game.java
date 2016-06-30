@@ -26,8 +26,11 @@ public class Game {
     int render_time = 130;
     // previous score
     int previous_score=0;
+    // difficulty level of game
+    int difficulty;
     
-    public Game() {
+    public Game(int difficulty) {
+        this.difficulty = difficulty; // determined from Options screen
         this.windowWidth=40;
         this.windowHeight=40;
         this.board = new int[windowWidth][windowHeight];
@@ -40,7 +43,7 @@ public class Game {
         this.current_direction = "r";
     }
     
-    public void drawWindow() {
+    private void drawWindow() {
     /* Creates a window for the application*/
         StdDraw.clear();
         StdDraw.setXscale(0.0, windowWidth);
@@ -61,21 +64,24 @@ public class Game {
         }
     }
     
-    public void initializeSnake(int num_foods) {
+    private void initialize(int num_foods) {
         /* Creates a snake in the middle of the window*/
         // set head
         board[head_coordinates[0]][head_coordinates[1]] = 2;
         for (int i=1; i<=4; i++) {
             board[windowWidth/2 - i][windowHeight/2] = 1;
         }
-        //  initialize obstacles
-        for (int i=0; i<5;i++) {
-            int x = (int) (Math.random()*this.windowWidth);
+        //  generate (4 * difficulty) obstacles
+        int rate = 4 * this.difficulty;
+        for (int i=0; i < rate;i++) {
+            // find obstacle coordinates
+            int x = (int) ((Math.random()*this.windowWidth + i * this.windowWidth) / rate); // space obstacles nicely; ensures reachability of food
             int y = (int) (Math.random()*this.windowHeight);
             if (x==0) x+=1;
             else if (x==windowWidth-1) x-=1;
             if (y==0) y+=1;
             else if (y==windowHeight-1) y-=1;
+            // draw obstacle
             if (board[x][y]==0) {
                 board[x][y] = 5;
                 board[x][y-1] = 5;
@@ -89,11 +95,12 @@ public class Game {
         generate_food(num_foods);
     }
     
-    public void render() {
+    private void render() {
         // Renders the board
         StdDraw.clear();
         StdDraw.picture(windowWidth*0.5, windowHeight*0.5, 
             "backgrounds/game.png", windowWidth*1.0, windowHeight*1.0);
+        
         // paint fence
         StdDraw.setPenColor(StdDraw.ORANGE);
         StdDraw.setPenRadius(0.015);
@@ -122,6 +129,7 @@ public class Game {
             }
         }
     }
+    
     public void startGame() {
         /*Brings evrything together. 
          * Draws the window for the app.
@@ -129,7 +137,8 @@ public class Game {
          * Includes key listener (triggers actions when arrows are pressed)*/ 
         StdDraw.clear();
         this.drawWindow();
-        this.initializeSnake(2);
+        this.initialize(2);
+        
         while (true) {
             //Up arrow pressed
             if (StdDraw.isKeyPressed(38) && !(this.current_direction.equals("d"))) {
@@ -147,21 +156,25 @@ public class Game {
             else if (!(this.current_direction.equals("u")) && StdDraw.isKeyPressed(40)) {
                 this.current_direction = "d";
             }
+            
             this.render();
+            
+            // update speed of snake based on score
             if (render_time > 100) {
                 StdDraw.show(render_time-3*current_score);
             } else if (render_time > 80){
                 StdDraw.show(render_time-2*current_score);
-            } else if (render_time > 60){
+            } else if (render_time > 60){ // min render time = 60
                 StdDraw.show(render_time-1*current_score);
-            } else {
+             } /*else {  
                 StdDraw.show(render_time-current_score/2);
-            }
-
+            }*/                 
+                
+            // check for Gameover and update the board array/coordinates
             try {
                 Update.updateBoard(this);
             } catch(Exception e) {
-                // Game Over Menu goes here!
+                // Game Over
                 Main.gameOver(this.current_score);
             }
             
