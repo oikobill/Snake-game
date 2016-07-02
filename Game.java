@@ -42,14 +42,7 @@ public class Game {
         this.butt_coordinates[1] = windowHeight/2;
         this.current_direction = "r";
     }
-    
-    private void drawWindow() {
-    /* Creates a window for the application*/
-        StdDraw.clear();
-        StdDraw.setXscale(0.0, windowWidth);
-        StdDraw.setYscale(0.0, windowHeight);       
-    }
-    
+        
     public void generate_food(int num_foods) {
         /* Randomly generates tiles that will be the "target"(we call it food)*/
         int x_cor;
@@ -136,7 +129,8 @@ public class Game {
          * Initializes the Snake
          * Includes key listener (triggers actions when arrows are pressed)*/ 
         StdDraw.clear();
-        this.drawWindow();
+        StdDraw.setXscale(0.0, windowWidth);
+        StdDraw.setYscale(0.0, windowHeight); 
         this.initialize(2);
         
         while (true) {
@@ -156,7 +150,7 @@ public class Game {
             else if (!(this.current_direction.equals("u")) && StdDraw.isKeyPressed(40)) {
                 this.current_direction = "d";
             }
-            
+                        
             this.render();
             
             // update speed of snake based on score
@@ -166,9 +160,7 @@ public class Game {
                 StdDraw.show(render_time-2*current_score);
             } else if (render_time > 60){ // min render time = 60
                 StdDraw.show(render_time-1*current_score);
-             } /*else {  
-                StdDraw.show(render_time-current_score/2);
-            }*/                 
+             }                
                 
             // check for Gameover and update the board array/coordinates
             try {

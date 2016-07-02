@@ -64,7 +64,8 @@ public class Main {
      
     // GameOver screen 
     public static void gameOver(int current_score) 
-    {   StdDraw.clear();    
+    {           
+        StdDraw.clear();    
         // input username
         String current_name = JOptionPane.showInputDialog ( "                   Game Over! \n Enter player name (max 9 characters):" ); 
         // if the user does not give a player name the string becomes 
@@ -200,24 +201,28 @@ public class Main {
         // Options - Exit
         StdDraw.picture(15.5, 15.5, "buttons/exit_icon.png");
         
-        // Options - Difficulty
+        // Options - Difficulty Box
         StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.picture(8.0, 2.0, "buttons/blanksquare.png", 8.0, 1.7);
+        StdDraw.picture(8.0, 9.5, "buttons/blanksquare.png");
+        StdDraw.text(8.0, 9.5, "Difficulty Level: "+ difficulty);           
+      
+        // Options - Difficulty Levels
+        StdDraw.setPenColor(StdDraw.BLACK);
         Font font = new Font("Arial", Font.PLAIN, 28);
-        StdDraw.setFont(font);        
-        StdDraw.text(8.0, 2.0, "Adjust Difficulty");                
+        StdDraw.setFont(font);  
+        StdDraw.picture(5.0, 6.0, "buttons/blanksquare.png", 2.0, 2.0);              
+        StdDraw.text(5.0, 6.0, "1"); 
+        StdDraw.picture(8.0, 6.0, "buttons/blanksquare.png", 2.0, 2.0);              
+        StdDraw.text(8.0, 6.0, "2"); 
+        StdDraw.picture(11.0, 6.0, "buttons/blanksquare.png", 2.0, 2.0);              
+        StdDraw.text(11.0, 6.0, "3");         
         
        // Options - Back Button
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.rectangle(15, 0.7, 0.9, 0.5);
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.text(15, 0.65, "Back");
-        
-        // Options - Difficulty Box
-        StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.picture(8.0, 9.5, "buttons/blanksquare.png");
-        StdDraw.text(8.0, 9.5, "Difficulty Level: "+ difficulty);           
-      
+                
         while(true){
             // Button Interactions
             if (StdDraw.mousePressed()) 
@@ -228,29 +233,36 @@ public class Main {
                 {
                     System.exit(0);
                 }  
-                // if Adjust difficulty clicked
-                else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 &&
-                         StdDraw.mouseY() >= 1.0 && StdDraw.mouseY() <= 3.0) 
+                // if Options Levels clicked
+                else if (StdDraw.mouseX() >= 4.0 && StdDraw.mouseX() <= 6.0 &&
+                         StdDraw.mouseY() >= 5.0 && StdDraw.mouseY() <= 7.0) 
                 {
-                    
-                    // check whether input is int
-                    try {
-                        difficulty = Integer.parseInt(JOptionPane.showInputDialog ("Enter difficulty level (1, 2, or 3): \n (1 = easy, 2 = medium, 3 = hard)"));
-                    } catch(Exception e) {
-                        difficulty = Integer.parseInt(JOptionPane.showInputDialog ("Please enter proper difficulty level (1, 2, or 3): \n (1 = easy, 2 = medium, 3 = hard)"));
-                    }
-                    
-                    //check whether difficulty level is not proper
-                    if( difficulty != 1 && difficulty != 2 && difficulty != 3) {
-                        difficulty = Integer.parseInt(JOptionPane.showInputDialog ("Please enter proper difficulty level (1, 2, or 3): \n (1 = easy, 2 = medium, 3 = hard)"));
-                    }
-                    
+                    // adjust difficulty
+                    difficulty = 1;                    
+                    //reset Options screen  once difficulty changed
+                    StdDraw.clear();
+                    Options();          
+                } 
+                 else if (StdDraw.mouseX() >= 7.0 && StdDraw.mouseX() <= 9.0 &&
+                         StdDraw.mouseY() >= 5.0 && StdDraw.mouseY() <= 7.0) 
+                {
+                    // adjust difficulty
+                    difficulty = 2;                    
+                    //reset Options screen  once difficulty changed
+                    StdDraw.clear();
+                    Options();          
+                }   
+                  else if (StdDraw.mouseX() >= 10.0 && StdDraw.mouseX() <= 12.0 &&
+                         StdDraw.mouseY() >= 5.0 && StdDraw.mouseY() <= 7.0) 
+                {
+                    // adjust difficulty
+                    difficulty = 3;                    
                     //reset Options screen  once difficulty changed
                     StdDraw.clear();
                     Options();          
                 }   
                 // if Back Button clicked, return to Main Menu
-                if (StdDraw.mouseX() >= 13.0 && StdDraw.mouseX() <= 16.0 &&
+                else if (StdDraw.mouseX() >= 13.0 && StdDraw.mouseX() <= 16.0 &&
                     StdDraw.mouseY() >= 0.0 && StdDraw.mouseY() <= 1.0)
                 {
                     StdDraw.clear();
