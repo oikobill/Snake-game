@@ -14,6 +14,20 @@ Description
 
 This is a classic game of snake in an app-like form. To run the project just clone the repo, go into the Snake-game folder and run `java Main` in your terminal. 
 
+Features
+---------
+1. Obstacles
+
+2. Difficulty levels
+
+3. Speed increase
+
+4. High Scores table
+
+5. Snake acceleration
+
+6. Snake increases in size
+
 Pictures
 ---------
 ![alt text](https://raw.githubusercontent.com/oikobill/Snake-game/master/screenshots/main_menu.png "Main Menu")
@@ -60,4 +74,6 @@ mouse_icon.png: http://www.geekchamp.com/icon-explorer/animal-icons/icon?code=1f
 
 
 app_icon.png: https://github.com/google/material-design-icons
+
+trophy.png: http://findicons.com/icon/596396/trophy
 
