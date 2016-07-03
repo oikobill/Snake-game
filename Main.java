@@ -218,11 +218,15 @@ public class Main {
         StdDraw.text(11.0, 6.0, "3");         
         
        // Options - Back Button
+        font = new Font("Cabin Sketch", Font.BOLD, 23);
+        StdDraw.setFont(font);  
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.rectangle(15, 0.7, 0.9, 0.5);
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.text(15, 0.65, "Back");
-                
+        font = new Font("Cabin Sketch", Font.PLAIN, 23);
+        StdDraw.setFont(font);  
+        
         while(true){
             // Button Interactions
             if (StdDraw.mousePressed()) 
@@ -290,14 +294,14 @@ public class Main {
         StdDraw.picture(8.0, 9.0, "buttons/play.png");
         
         // Main Menu High Scores
-        StdDraw.picture(8.0, 5.0, "buttons/highscore.png");
+        StdDraw.picture(0.75, 0.75, "buttons/trophy.png", 1.5, 1.5);
         
         // Main Menu Options
         StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.picture(8.0, 2.0, "buttons/blanksquare.png", 8.0, 1.7);
+        StdDraw.picture(8.0, 5.0, "buttons/blanksquare.png", 8.0, 1.7);
         Font font = new Font("Arial", Font.PLAIN, 28);
         StdDraw.setFont(font);        
-        StdDraw.text(8.0, 2.0, "Options");
+        StdDraw.text(8.0, 5.0, "Options");
                 
         // Main Menu Exit
         StdDraw.picture(15.5, 15.5, "buttons/exit_icon.png");
@@ -320,20 +324,19 @@ public class Main {
                     Game game = new Game(difficulty);
                     game.startGame();
                 }
-                // if High Scores clicked
+                // if Options clicked
                 else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 &&
                          StdDraw.mouseY() >= 4.0 && StdDraw.mouseY() <= 6.0) 
                 {
                     StdDraw.clear();
-                    highScores();                    
-                }  
-                // if Options clicked
-                else if (StdDraw.mouseX() >= 5.0 && StdDraw.mouseX() <= 11.0 &&
-                         StdDraw.mouseY() >= 1.0 && StdDraw.mouseY() <= 3.0) 
+                    Options();                    
+                } 
+                else if (StdDraw.mouseX() >= 0.0 && StdDraw.mouseX() <= 1.5 &&
+                         StdDraw.mouseY() >= 0.0 && StdDraw.mouseY() <= 1.5) 
                 {
                     StdDraw.clear();
-                    Options();                    
-                }   
+                    highScores();                    
+                }  
             }          
         }
     }
